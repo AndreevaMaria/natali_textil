@@ -2,12 +2,14 @@
 
 namespace App;
 
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
-class Fabric extends Model
-{
+class Fabric extends Model {
+    use Notifiable;
+
     protected $primaryKey = 'id';
-    protected $table = 'fabrics';
+   // protected $table = 'fabrics';
     protected $fillable = [
         'idFabricsType',
         'title',
@@ -24,8 +26,7 @@ class Fabric extends Model
         'is_trend'
     ];
     
-    public function FabricsType()
-    {
+    public function FabricsType() {
         return $this->belongsTo('App\FabricsType');
     }
 
