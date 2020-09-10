@@ -29,6 +29,7 @@ Route::put('/fabricstype/{id}/fabric/{idFabric}', 'FabricController@updateFabric
 Route::delete('/fabricstype/{id}/fabric/{idFabric}', 'FabricController@deleteFabric');
 
 Route::post('/files/fabrics/upload', 'FabricController@addPhotos');
+Route::get('fabric/search', 'FabricController@search');
 
 Route::get('users/', 'UserController@getUsersList');
 Route::get('/users/{idUser}', 'UserController@getUserById');

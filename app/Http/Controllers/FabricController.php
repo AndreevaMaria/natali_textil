@@ -52,7 +52,6 @@ class FabricController extends Controller
      * Удалить ткань.
      *
      * @param int $id  (required)
-     * @param int $idMachineryGroup  (required)
      *
      * @return Http response
      */
@@ -71,7 +70,6 @@ class FabricController extends Controller
      * Обновить ткань.
      *
      * @param int $id  (required)
-     * @param int $idMachineryGroup  (required)
      *
      * @return Http response
      */
@@ -90,16 +88,24 @@ class FabricController extends Controller
         $input = Request::all();
 
         $idFabric = $input['idFabric'];
-        $file = $input['Сertificatepath'];
+        $file = $input['imagepath'];
 
         $fabric = Fabric::find($idFabric);
 
         if ($file !== null) {
             $original_name = $idFabric.'.'.$file->getClientOriginalExtension();
-            $file->move(public_path().'/certificates', $original_name);
-            $hose->Certificatepath = 'certificates/'.$original_name;
+            $file->move(public_path().'/images', $original_name);
+            $hose->imagepath = 'images/'.$original_name;
         }
+
         $fabric->save();
         return $fabric;
+    }
+
+    public function search() {
+        $search = $input['searchform'];
+        $search = '%'.$search.'%';
+        $fabrics = Fabric::where('title', 'like', $search)->get();
+        return response()->json($fabrics, 201);
     }
 }
