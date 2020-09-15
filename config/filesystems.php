@@ -42,6 +42,12 @@ return [
     */
 
     'disks' => [
+        'images' => [
+            'driver' => 'local',
+            'root' => storage_path(),
+            'visibility' => 'public',
+        ],
+
 
         'local' => [
             'driver' => 'local',
