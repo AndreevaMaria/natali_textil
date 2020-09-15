@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(FabricsTypeSeeder::class);
         $this->call(FabricSeeder::class);
         $this->call(PhotoSeeder::class);
+        $this->call(OrderSeeder::class);
     }
 }

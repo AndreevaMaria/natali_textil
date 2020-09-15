@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class FabricsTable extends Migration
+class CreateFabricsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -19,15 +19,15 @@ class FabricsTable extends Migration
             $table->string("title");
             $table->string("articul");
             $table->string("price");
-            $table->string("price_new");
+            $table->string("price_new")->nullable();
             $table->string("decsription");
             $table->string("fabric_composition");
             $table->string("fabric_width");
             $table->string("fabric_density");
-            $table->boolean('is_oneton');
-            $table->boolean('is_new');
-            $table->boolean('is_action');
-            $table->boolean('is_trend');
+            $table->boolean('is_oneton')->default('0')->nullable();
+            $table->boolean('is_new')->default('0')->nullable();
+            $table->boolean('is_action')->default('0')->nullable();
+            $table->boolean('is_trend')->default('0')->nullable();
             $table->timestamps();
             $table->foreign('idFabricsType')->references('id')->on('fabrics_types')->onDelete('cascade');
         });

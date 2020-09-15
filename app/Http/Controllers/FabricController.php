@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\FabricsType;
 use App\Fabric;
-use App\Photo;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
@@ -30,6 +29,21 @@ class FabricController extends Controller
         return Fabric::where('idFabricsType', $id)->get();
     }
     /**
+     * Operation getFabric
+     *
+     * Открыть ткань по id.
+     *
+     * @param int $id  (required)
+     *
+     * @return Http response
+     */
+    public function getFabric($idFabric)
+    {
+        $input = Request::all();
+
+        return response()->json(Fabric::find($idFabric), 200);
+    }
+    /**
      * Operation postFabric
      *
      * Создать ткань.
@@ -42,9 +56,9 @@ class FabricController extends Controller
     {
         $input = Request::all();
 
-        $fabricsType = FabricsType::find($id)->update($input);
+        //$fabricsType = FabricsType::find($id)->update($input);
 
-        return response()->json(Fabric::create($input), 201)->json($fabricsType, 200);
+        return response()->json(Fabric::create($input), 201);
     }
     /**
      * Operation deleteFabric
@@ -60,7 +74,7 @@ class FabricController extends Controller
         $input = Request::all();
 
         $fabric = Fabric::find($idFabric)->delete();
-        $fabricType = FabricType::find($id)->update($input);
+        //$fabricType = FabricType::find($id)->update($input);
 
         return response()->json('', 200);
     }
@@ -78,28 +92,9 @@ class FabricController extends Controller
         $input = Request::all();
 
         $fabric = Fabric::find($idFabric)->update($input);
-        $fabricType = FabricType::find($id)->update($input);
+       // $fabricType = FabricType::find($id)->update($input);
 
-        return response()->json($fabric, 200)->json($fabricType, 200);
-    }
-
-    public function addPhotos()
-    {
-        $input = Request::all();
-
-        $idFabric = $input['idFabric'];
-        $file = $input['imagepath'];
-
-        $fabric = Fabric::find($idFabric);
-
-        if ($file !== null) {
-            $original_name = $idFabric.'.'.$file->getClientOriginalExtension();
-            $file->move(public_path().'/images', $original_name);
-            $hose->imagepath = 'images/'.$original_name;
-        }
-
-        $fabric->save();
-        return $fabric;
+        return response()->json($fabric, 200)
     }
 
     public function search() {
